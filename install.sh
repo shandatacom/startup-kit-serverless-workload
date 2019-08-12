@@ -55,7 +55,7 @@ else
 fi
 
 
-REST_API_ID=`aws cloudformation list-stack-resources --stack-name ${STACK_NAME} | grep -A2 'AWS::ApiGateway::RestApi' | grep 'PhysicalResourceId' | awk '{print $2}' | tr -d '"' | tr -d ","`
+REST_API_ID=`aws cloudformation list-stack-resources --stack-name ${STACK_NAME} | grep -A2 -B2 'AWS::ApiGateway::RestApi' | grep 'PhysicalResourceId' | awk '{print $2}' | tr -d '"' | tr -d ","`
 REST_API_URL="https://${REST_API_ID}.execute-api.${REGION}.amazonaws.com/Stage"
 
 echo "The rest API url is ${REST_API_URL}"
